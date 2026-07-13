@@ -1,0 +1,122 @@
+# Agent Meme — Schema v1.0
+# 每个表情包的字段定义
+
+id:
+  type: string
+  required: true
+  pattern: "^[a-z0-9-]+$"
+  example: "panda-head-001"
+  description: "唯一标识符，格式：{系列名}-{三位序号}"
+
+emoji:
+  type: string
+  required: false
+  example: "🐼"
+  description: "关联的 Unicode 表情（可选）"
+
+name:
+  type: string
+  required: true
+  example: "熊猫头哭"
+  description: "简短名称，供 Agent 内部引用"
+
+file:
+  type: string
+  required: true
+  example: "assets/panda-head/001-ku.gif"
+  description: "图片文件相对路径"
+
+url:
+  type: string
+  required: true
+  pattern: "^https?://"
+  description: "CDN 直链，Agent 发送给用户"
+
+# ---- VAD 情绪维度 ----
+
+vad:
+  type: object
+  required: true
+  children:
+    valence:
+      type: number
+      range: [0.0, 1.0]
+      description: "效价：0=极度负面，0.5=中性，1=极度正面"
+    arousal:
+      type: number
+      range: [0.0, 1.0]
+      description: "唤醒度：0=死气沉沉，0.5=有感觉，1=极度亢奋"
+    dominance:
+      type: number
+      range: [0.0, 1.0]
+      description: "支配度：0=完全弱势，0.5=平等，1=完全强势"
+
+# ---- 社交维度 ----
+
+irony:
+  type: number
+  range: [0.0, 1.0]
+  required: true
+  description: "反讽度：0=字面即本意，0.5=半真半假，1=表面意思完全相反"
+
+intimacy:
+  type: number
+  range: [0.0, 1.0]
+  required: true
+  description: "亲密度：0=正式场合可用，0.5=普通朋友，1=只有死党/对象能发"
+
+aggression:
+  type: number
+  range: [0.0, 1.0]
+  required: true
+  description: "攻击性：0=纯友善，0.5=带刺，1=直接人身攻击"
+
+# ---- 语义描述 ----
+
+description:
+  type: string
+  required: true
+  max_length: 200
+  description: "表情包的画面描述，Agent 语义匹配用"
+
+tags:
+  type: array
+  required: true
+  min_items: 3
+  max_items: 15
+  item_type: string
+  description: "关键词标签，跟语境做语义匹配"
+
+context:
+  type: array
+  required: true
+  min_items: 2
+  max_items: 10
+  item_type: string
+  description: "适用场景，描述什么时候该用这个表情包"
+
+persona:
+  type: array
+  required: false
+  max_items: 5
+  item_type: string
+  description: "适合的 Agent 人设风格，如：沙雕、暖男、高冷"
+
+intensity:
+  type: number
+  range: [0.0, 1.0]
+  required: true
+  description: "表情包自身的情感力度：0=微表情，1=极度夸张"
+
+# ---- 元信息 ----
+
+version:
+  type: integer
+  required: true
+  default: 1
+  description: "数据版本号，修改后 +1"
+
+contributor:
+  type: string
+  required: false
+  description: "贡献者 ID（选填）"

@@ -1,0 +1,943 @@
+# Agent Meme — 表情包数据集
+# 维基式维护，一条 PR 一个表情包
+# 图片文件放在 assets/{系列名}/ 下
+
+stickers:
+- id: cartoon-001
+  emoji: 👦
+  name: 蜡笔小新收到
+  file: assets/cartoon/001-shoudao-xiaoxin.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cartoon/001-shoudao-xiaoxin.jpg
+  vad:
+    valence: 0.65
+    arousal: 0.35
+    dominance: 0.55
+  irony: 0.05
+  intimacy: 0.55
+  aggression: 0.0
+  description: 蜡笔小新侧身站立，一手背在身后看向右方，姿态轻松随意，配大字「收到」
+  tags:
+  - 收到
+  - 了解
+  - 明白
+  - 收到收到
+  - 知道了
+  - 确认
+  context:
+  - 确认指令
+  - 日常回复
+  - 收到通知
+  - 轻松应答
+  persona:
+  - 轻松
+  - 随和
+  intensity: 0.3
+  version: 1
+- id: doge-003
+  emoji: 🐶
+  name: 小白狗收到
+  file: assets/doge/003-shoudao-box.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/doge/003-shoudao-box.jpg
+  vad:
+    valence: 0.75
+    arousal: 0.45
+    dominance: 0.35
+  irony: 0.0
+  intimacy: 0.65
+  aggression: 0.0
+  description: 白色毛茸小狗蹲在快递纸箱里，好奇望镜头，头顶大字「收到」，嘴边气泡「3」
+  tags:
+  - 收到
+  - 乖巧
+  - 可爱
+  - 收到收到
+  - 萌
+  - 确认
+  context:
+  - 确认指令
+  - 乖巧答应
+  - 收到并等待
+  - 可爱回应
+  persona:
+  - 软萌
+  - 乖巧
+  intensity: 0.4
+  version: 1
+- id: cat-002
+  emoji: 🐱
+  name: 眼镜猫办公收到
+  file: assets/cat/002-shoudao-laptop.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/002-shoudao-laptop.jpg
+  vad:
+    valence: 0.6
+    arousal: 0.3
+    dominance: 0.6
+  irony: 0.0
+  intimacy: 0.45
+  aggression: 0.0
+  description: 橘猫戴着圆框眼镜端坐笔记本电脑前，爪子搭在键盘上，左上角大字「收到」，严肃专业
+  tags:
+  - 收到
+  - 收到收到
+  - 确认
+  - 专业
+  - 认真
+  - 工作中
+  context:
+  - 确认命令
+  - 正式回复
+  - 严肃场景
+  - 工作状态
+  persona:
+  - 专业
+  - 认真
+  intensity: 0.35
+  version: 1
+- id: cat-003
+  emoji: 🐱
+  name: 橘猫我错了
+  file: assets/cat/003-wo-cuo-le.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/003-wo-cuo-le.jpg
+  vad:
+    valence: 0.15
+    arousal: 0.5
+    dominance: 0.1
+  irony: 0.0
+  intimacy: 0.65
+  aggression: 0.0
+  description: 浅橘色猫猫眯眼低头，耳朵后倾，一副老实认错的委屈表情，配大字「我错了」
+  tags:
+  - 我错了
+  - 对不起
+  - 认错
+  - 道歉
+  - 道歉专用
+  - 错了
+  - 原谅我
+  context:
+  - 犯错了
+  - 失误
+  - 道歉
+  - 求原谅
+  - 做错事了
+  persona:
+  - 老实
+  - 诚恳
+  - 委屈
+  intensity: 0.55
+  version: 1
+- id: cat-004
+  emoji: 🐱
+  name: 白猫道歉
+  file: assets/cat/004-ru-guo-re-ni.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/004-ru-guo-re-ni.jpg
+  vad:
+    valence: 0.3
+    arousal: 0.25
+    dominance: 0.15
+  irony: 0.0
+  intimacy: 0.7
+  aggression: 0.0
+  description: 白色长毛猫瞪着碧绿大眼睛，表情无辜，配文「如果我惹你生气了 / 我给你道歉」
+  tags:
+  - 对不起
+  - 道歉
+  - 原谅我
+  - 我错了
+  - 哄你
+  - 别生气了
+  context:
+  - 惹对方不高兴了
+  - 需要哄人
+  - 轻微冒犯
+  - 放低姿态求原谅
+  persona:
+  - 温柔
+  - 软萌
+  - 无辜
+  intensity: 0.3
+  version: 1
+- id: cat-005
+  emoji: 🐱
+  name: 白猫对不起
+  file: assets/cat/005-duibuqi.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/005-duibuqi.jpg
+  vad:
+    valence: 0.1
+    arousal: 0.6
+    dominance: 0.05
+  irony: 0.0
+  intimacy: 0.65
+  aggression: 0.0
+  description: 白色长毛猫大眼睛闪着蓝色泪光，泪滴从眼角流下，表情极度委屈，配文「对不起 我错了」
+  tags:
+  - 对不起
+  - 我错了
+  - 对不起我错了
+  - 道歉
+  - 原谅我
+  - 哭了
+  - 委屈
+  context:
+  - 犯大错
+  - 极度抱歉
+  - 求原谅
+  - 崩溃道歉
+  - 严重失误
+  persona:
+  - 委屈
+  - 无助
+  - 诚恳
+  intensity: 0.8
+  version: 1
+- id: cat-006
+  emoji: 🐱
+  name: 小猫低头认罪
+  file: assets/cat/006-ditou-renzui.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/006-ditou-renzui.jpg
+  vad:
+    valence: 0.15
+    arousal: 0.4
+    dominance: 0.05
+  irony: 0.05
+  intimacy: 0.7
+  aggression: 0.0
+  description: 奶白色小猫从木门后探出半个脑袋，低头垂眼不敢直视，耳朵后贴，配文「低头认罪」
+  tags:
+  - 我错了
+  - 认罪
+  - 低头
+  - 认错
+  - 对不起
+  - 怂了
+  - 认怂
+  context:
+  - 被抓包了
+  - 铁证如山无法狡辩
+  - 老实认错
+  - 怂了认栽
+  persona:
+  - 怂
+  - 老实
+  - 被抓现行
+  intensity: 0.45
+  version: 1
+- id: cat-007
+  emoji: 🐱
+  name: 橘白猫问号
+  file: assets/cat/007-yihuo-wenhao.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/007-yihuo-wenhao.jpg
+  vad:
+    valence: 0.42
+    arousal: 0.45
+    dominance: 0.48
+  irony: 0.1
+  intimacy: 0.5
+  aggression: 0.05
+  description: 橘白猫瞪着大眼睛仰头望你，头顶一个白色问号，配文「懵懂的眼神里写满了疑惑」
+  tags:
+  - 问号
+  - 疑惑
+  - 不懂
+  - 理解不能
+  - 什么鬼
+  - 啥意思
+  context:
+  - 没听懂
+  - 对方说法有问题
+  - 需要解释
+  - 迷惑行为
+  persona:
+  - 困惑
+  - 略有质疑
+  intensity: 0.5
+  version: 1
+- id: cartoon-002
+  emoji: 🐭
+  name: 卡通老鼠懵逼
+  file: assets/cartoon/002-mengbi-wenhao.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cartoon/002-mengbi-wenhao.jpg
+  vad:
+    valence: 0.4
+    arousal: 0.7
+    dominance: 0.2
+  irony: 0.1
+  intimacy: 0.55
+  aggression: 0.0
+  description: 经典卡通老鼠直立双手贴脸，满屏白色问号环绕，整只鼠处于信息过载状态
+  tags:
+  - 问号
+  - 黑人问号
+  - 懵逼
+  - 大脑空白
+  - 看不懂
+  - 什么情况
+  context:
+  - 信息过载
+  - 完全不懂
+  - 逻辑爆炸
+  - 看到迷惑操作宕机
+  persona:
+  - 懵逼
+  - 震惊
+  intensity: 0.85
+  version: 1
+- id: cat-008
+  emoji: 🐱
+  name: 猫嘴微张问号
+  file: assets/cat/008-zuiwei-zhang.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/008-zuiwei-zhang.jpg
+  vad:
+    valence: 0.38
+    arousal: 0.5
+    dominance: 0.65
+  irony: 0.45
+  intimacy: 0.5
+  aggression: 0.3
+  description: 猫微张嘴露出舌尖欲言又止，头上一个小问号，眼神中带着'你认真的？'的审视
+  tags:
+  - 问号
+  - 疑惑
+  - 你认真的
+  - 反问
+  - 质疑
+  - 黑人问号
+  - 不是我的问题
+  context:
+  - 质疑对方说法
+  - 反问式疑惑
+  - 你确定？
+  - 不是我有问题是你
+  persona:
+  - 毒舌
+  - 审视
+  - 反击
+  intensity: 0.45
+  version: 1
+- id: cat-009
+  emoji: 🐱
+  name: 白猫趴卧疑问
+  file: assets/cat/009-pa-wo-wenhao.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/009-pa-wo-wenhao.jpg
+  vad:
+    valence: 0.48
+    arousal: 0.2
+    dominance: 0.4
+  irony: 0.05
+  intimacy: 0.55
+  aggression: 0.0
+  description: 白毛蓝眼猫趴在灰毯上静静盯着镜头，神情慵懒但眼神透着不解，配文「疑惑？」
+  tags:
+  - 疑惑
+  - 不懂
+  - 想不通
+  - 嗯?
+  - 不解
+  - 困惑
+  context:
+  - 温和追问
+  - 没想通
+  - 日常疑问
+  - 求解释
+  persona:
+  - 温和
+  - 冷静
+  intensity: 0.25
+  version: 1
+- id: cat-010
+  emoji: 🐱
+  name: 橘猫竖爪牛
+  file: assets/cat/010-niu.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/010-niu.jpg
+  vad:
+    valence: 0.85
+    arousal: 0.55
+    dominance: 0.75
+  irony: 0.0
+  intimacy: 0.5
+  aggression: 0.0
+  description: 橘猫正坐伸出前爪亮出爪子，眼睛微眯嘴角上扬，旁边三个感叹号+大字「牛」
+  tags:
+  - 牛
+  - 厉害
+  - 牛逼
+  - 赞
+  - 优秀
+  - 顶
+  - 强
+  context:
+  - 赞同
+  - 赞赏
+  - 夸奖
+  - 认可
+  - 用户很强
+  - 值得点赞
+  persona:
+  - 霸气
+  - 赞赏
+  intensity: 0.7
+  version: 1
+- id: text-001
+  emoji: 💯
+  name: 一百分
+  file: assets/text/001-100.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/text/001-100.jpg
+  vad:
+    valence: 0.95
+    arousal: 0.6
+    dominance: 0.55
+  irony: 0.0
+  intimacy: 0.35
+  aggression: 0.0
+  description: 红色手写体数字「100」，简洁粗体，白底，视觉冲击力强
+  tags:
+  - '100'
+  - 满分
+  - 完美
+  - 赞
+  - 太棒了
+  - 一百
+  - 好评
+  context:
+  - 赞同
+  - 满分认可
+  - 无话可说就是好
+  - 简洁夸奖
+  persona:
+  - 简洁
+  - 直接
+  intensity: 0.75
+  version: 1
+- id: doge-004
+  emoji: 🐶
+  name: 柴犬开心咧嘴
+  file: assets/doge/004-kaixin-chai.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/doge/004-kaixin-chai.jpg
+  vad:
+    valence: 0.9
+    arousal: 0.75
+    dominance: 0.5
+  irony: 0.0
+  intimacy: 0.6
+  aggression: 0.0
+  description: 柴犬张大嘴咧到耳根吐舌大笑，眼睛眯成缝，前爪抬起像在挥爪庆祝
+  tags:
+  - 开心
+  - 高兴
+  - 太棒了
+  - 庆祝
+  - 兴奋
+  - 'YES'
+  - 好评
+  context:
+  - 开心
+  - 好消息
+  - 庆祝
+  - 高兴的事
+  - 用户好消息
+  persona:
+  - 开心
+  - 热情
+  intensity: 0.8
+  version: 1
+- id: gesture-001
+  emoji: 👍
+  name: 大拇指点赞
+  file: assets/gesture/001-thumbs-up.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/gesture/001-thumbs-up.jpg
+  vad:
+    valence: 0.9
+    arousal: 0.35
+    dominance: 0.55
+  irony: 0.0
+  intimacy: 0.3
+  aggression: 0.0
+  description: 一只手竖起大拇指，深色长袖，背景虚化，经典的认可手势
+  tags:
+  - 点赞
+  - 赞
+  - 好的
+  - 厉害
+  - 可以
+  - 稳
+  context:
+  - 赞同
+  - 称赞
+  - 认可
+  - 简单回复
+  - 通用赞赏
+  persona:
+  - 简洁
+  - 通用
+  intensity: 0.3
+  version: 1
+- id: cat-011
+  emoji: 🐱
+  name: 小猫谢谢
+  file: assets/cat/011-xiexie.gif
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/011-xiexie.gif
+  vad:
+    valence: 0.85
+    arousal: 0.5
+    dominance: 0.35
+  irony: 0.0
+  intimacy: 0.55
+  aggression: 0.0
+  description: 粉白卡通猫举起双手做感谢状，面带微笑大眼睛水汪汪，配文「谢谢~」，GIF动图
+  tags:
+  - 谢谢
+  - 感谢
+  - 谢谢老板
+  - 比心
+  - 感恩
+  - 多谢
+  context:
+  - 感谢
+  - 用户夸奖
+  - 收到帮助
+  - 感激
+  - 礼貌回应
+  persona:
+  - 软萌
+  - 礼貌
+  - 感激
+  intensity: 0.45
+  version: 1
+- id: cat-012
+  emoji: 🐱
+  name: 猫猫顿悟
+  file: assets/cat/012-dunwu.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/012-dunwu.jpg
+  vad:
+    valence: 0.7
+    arousal: 0.55
+    dominance: 0.6
+  irony: 0.0
+  intimacy: 0.5
+  aggression: 0.0
+  description: 猫仰头抬爪作思考状，头顶灯泡+「点化」配文，下方「恍然大悟」，经典顿悟瞬间
+  tags:
+  - 懂了
+  - 恍然大悟
+  - 明白了
+  - 原来如此
+  - 顿悟
+  - 懂了懂了
+  - 通了
+  context:
+  - 突然理解了
+  - 解释通了
+  - 恍然大悟
+  - 问题解决了
+  - 茅塞顿开
+  persona:
+  - 顿悟
+  - 开窍
+  intensity: 0.6
+  version: 1
+- id: cat-013
+  emoji: 🐱
+  name: 灰白猫顿悟
+  file: assets/cat/013-huangrandawu.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/013-huangrandawu.jpg
+  vad:
+    valence: 0.75
+    arousal: 0.65
+    dominance: 0.55
+  irony: 0.0
+  intimacy: 0.5
+  aggression: 0.0
+  description: 灰白卡通猫瞪大眼睛微张嘴一脸震惊式醒悟，背景彩色光线炸裂，配文「恍然大悟！」
+  tags:
+  - 懂了
+  - 恍然大悟
+  - 原来如此
+  - 明白了
+  - 终于懂了
+  - 通透了
+  context:
+  - 恍然大悟
+  - 解释通了
+  - 突然想通
+  - 茅塞顿开
+  - 终于明白
+  persona:
+  - 顿悟
+  - 开窍
+  intensity: 0.7
+  version: 1
+- id: doge-005
+  emoji: 🐶
+  name: 小白狗震惊哇
+  file: assets/doge/005-wa-zhenjing.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/doge/005-wa-zhenjing.jpg
+  vad:
+    valence: 0.55
+    arousal: 0.8
+    dominance: 0.25
+  irony: 0.05
+  intimacy: 0.55
+  aggression: 0.0
+  description: 白色毛茸小狗瞪眼张嘴满脸震惊，满屏N个「哇」字环绕，被彻底惊呆的表情
+  tags:
+  - 震惊
+  - 哇
+  - 惊呆了
+  - 难以置信
+  - 完全没想到
+  - 什么情况
+  - 我的天
+  context:
+  - 震惊
+  - 惊天大瓜
+  - 完全没想到
+  - 刷新三观
+  - 不可思议
+  persona:
+  - 震惊
+  - 吃瓜
+  intensity: 0.85
+  version: 1
+- id: cartoon-003
+  emoji: 🌱
+  name: 小豆人晓得了
+  file: assets/cartoon/003-xiaodele.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cartoon/003-xiaodele.jpg
+  vad:
+    valence: 0.7
+    arousal: 0.4
+    dominance: 0.5
+  irony: 0.0
+  intimacy: 0.55
+  aggression: 0.0
+  description: 极简白豆人头顶绿芽，举起一只细手做讲解状，配文「晓得了！」口语式轻快明白
+  tags:
+  - 懂了
+  - 晓得了
+  - 明白
+  - 了解
+  - 收到
+  - 搞懂了
+  context:
+  - 轻松明白
+  - 解答完毕
+  - 问题搞定
+  - 口语确认
+  persona:
+  - 轻松
+  - 明白
+  intensity: 0.35
+  version: 1
+- id: doge-006
+  emoji: 🐶
+  name: 金毛捂嘴偷笑
+  file: assets/doge/006-wuzui-touxiao.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/doge/006-wuzui-touxiao.jpg
+  vad:
+    valence: 0.8
+    arousal: 0.35
+    dominance: 0.4
+  irony: 0.0
+  intimacy: 0.7
+  aggression: 0.0
+  description: 小金毛闭眼双爪捂嘴做偷笑状，身后是雪山蓝天，萌系暗喜
+  tags:
+  - 开心
+  - 好笑
+  - 偷笑
+  - 捂嘴
+  - 可爱
+  - 嘻嘻
+  - 暗喜
+  context:
+  - 开心
+  - 偷笑
+  - 听到好笑的事
+  - 可爱的事
+  - 被萌到了
+  persona:
+  - 软萌
+  - 暗喜
+  intensity: 0.35
+  version: 1
+- id: cat-014
+  emoji: 🐱
+  name: 腮红猫开心
+  file: assets/cat/014-kaixin-mao.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/014-kaixin-mao.jpg
+  vad:
+    valence: 0.9
+    arousal: 0.5
+    dominance: 0.45
+  irony: 0.0
+  intimacy: 0.6
+  aggression: 0.0
+  description: 白猫带腮红瞪大眼望镜头，头顶三颗黄色小星星，配大字「开心」
+  tags:
+  - 开心
+  - 高兴
+  - 快乐
+  - 愉快
+  - 好耶
+  - 太棒了
+  context:
+  - 开心
+  - 好消息
+  - 愉快的事
+  - 高兴的回复
+  persona:
+  - 开心
+  - 可爱
+  intensity: 0.55
+  version: 1
+- id: cat-015
+  emoji: 🐱
+  name: 橘白猫wink爱你
+  file: assets/cat/015-wink-aini.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/015-wink-aini.jpg
+  vad:
+    valence: 0.9
+    arousal: 0.45
+    dominance: 0.35
+  irony: 0.0
+  intimacy: 0.75
+  aggression: 0.0
+  description: 橘白猫单眼wink，爪抱蓝色小玩具，配文「wink~爱你」带星星特效，甜度爆表
+  tags:
+  - 开心
+  - 爱你
+  - wink
+  - 比心
+  - 亲昵
+  - 喜欢你
+  - 甜蜜
+  context:
+  - 开心
+  - 亲密互动
+  - 表达喜欢
+  - 被夸了
+  - 暖心时刻
+  persona:
+  - 甜
+  - 亲昵
+  - 卖萌
+  intensity: 0.6
+  version: 1
+- id: cat-016
+  emoji: 🐱
+  name: 灰猫震惊
+  file: assets/cat/016-zhenjing.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/016-zhenjing.jpg
+  vad:
+    valence: 0.4
+    arousal: 0.85
+    dominance: 0.2
+  irony: 0.0
+  intimacy: 0.45
+  aggression: 0.0
+  description: 灰色绿眼猫瞪眼张嘴满脸震惊，头顶三条白色放射线，配大字「震惊」
+  tags:
+  - 震惊
+  - 惊呆
+  - 目瞪口呆
+  - 不敢相信
+  - 完全没想到
+  - 什么
+  context:
+  - 震惊
+  - 难以置信
+  - 没想到
+  - 听到大消息
+  - 刷新认知
+  persona:
+  - 震惊
+  - 懵
+  intensity: 0.85
+  version: 1
+- id: cat-017
+  emoji: 🐱
+  name: 纸箱猫震惊
+  file: assets/cat/017-zhixiang-zhenjing.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/017-zhixiang-zhenjing.jpg
+  vad:
+    valence: 0.45
+    arousal: 0.65
+    dominance: 0.25
+  irony: 0.05
+  intimacy: 0.55
+  aggression: 0.0
+  description: 黑白花猫蹲在快递纸箱里瞪眼望镜头，头顶三个!!!感叹号，呆萌的震惊
+  tags:
+  - 震惊
+  - '!!!'
+  - 惊呆了
+  - 不敢相信
+  - 什么情况
+  context:
+  - 震惊
+  - 没想到
+  - 出乎意料
+  - 呆住
+  persona:
+  - 呆萌
+  - 震惊
+  intensity: 0.65
+  version: 1
+- id: misc-001
+  emoji: 👶
+  name: 小孩震惊脸
+  file: assets/misc/001-xiaohai-zhenjing.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/misc/001-xiaohai-zhenjing.jpg
+  vad:
+    valence: 0.45
+    arousal: 0.7
+    dominance: 0.2
+  irony: 0.0
+  intimacy: 0.4
+  aggression: 0.0
+  description: 小男孩瞪大眼微张嘴一脸震惊，圆脸抬头望，被彻底惊呆的纯真表情
+  tags:
+  - 震惊
+  - 惊呆了
+  - 不敢相信
+  - 懵了
+  - 什么
+  context:
+  - 震惊
+  - 不可置信
+  - 听到大消息
+  - 傻了
+  persona:
+  - 震惊
+  - 纯真
+  intensity: 0.7
+  version: 1
+- id: emoji-001
+  emoji: 🤔
+  name: 思考emoji
+  file: assets/emoji/001-thinking.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/emoji/001-thinking.jpg
+  vad:
+    valence: 0.5
+    arousal: 0.25
+    dominance: 0.5
+  irony: 0.0
+  intimacy: 0.35
+  aggression: 0.0
+  description: 黄色emoji手指托下巴作思考状，经典沉思姿态，表情中性
+  tags:
+  - 思考
+  - 思考中
+  - 想想
+  - 嗯
+  - 等等
+  - 让我想想
+  context:
+  - 思考中
+  - 需要时间
+  - 想一想
+  - 处理中
+  - 稍等片刻
+  persona:
+  - 中性
+  - 思考
+  intensity: 0.2
+  version: 1
+- id: cat-018
+  emoji: 🐱
+  name: 脑子缓冲中
+  file: assets/cat/018-naozi-huancun.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/018-naozi-huancun.jpg
+  vad:
+    valence: 0.48
+    arousal: 0.35
+    dominance: 0.3
+  irony: 0.15
+  intimacy: 0.6
+  aggression: 0.0
+  description: 猫猫眼神放空呆滞，头顶爆炸式缓冲图标，配文「脑子缓冲中」
+  tags:
+  - 思考中
+  - 缓冲
+  - 加载中
+  - 等等
+  - 让我想想
+  - 脑子不够用
+  - 处理中
+  context:
+  - 思考中
+  - 处理信息
+  - 加载中
+  - 需要时间
+  - CPU过载
+  persona:
+  - 呆萌
+  - 加载
+  intensity: 0.4
+  version: 1
+- id: doge-007
+  emoji: 🐶
+  name: 金毛晚安
+  file: assets/doge/007-wanan.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/doge/007-wanan.jpg
+  vad:
+    valence: 0.7
+    arousal: 0.15
+    dominance: 0.35
+  irony: 0.0
+  intimacy: 0.6
+  aggression: 0.0
+  description: 金毛犬把头趴桌上双眼微垂，一副困了要睡的样子，配文「晚安～」
+  persona:
+  - 温柔
+  - 礼貌
+  tags:
+  - 晚安
+  - 再见
+  - 拜拜
+  - 睡了
+  - 休息
+  - 明天见
+  context:
+  - 再见
+  - 结束对话
+  - 晚安告别
+  - 暂时离开
+  persona:
+  - 温柔
+  - 礼貌
+  intensity: 0.2
+  version: 1
+- id: cat-019
+  emoji: 🐱
+  name: 白猫晚安入睡
+  file: assets/cat/019-wanan-sleep.jpg
+  url: https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/019-wanan-sleep.jpg
+  vad:
+    valence: 0.8
+    arousal: 0.1
+    dominance: 0.3
+  irony: 0.0
+  intimacy: 0.7
+  aggression: 0.0
+  description: 卡通白猫闭眼微笑睡在粉色枕头上，腮红可爱，蓝背景+星月，配文「晚安」
+  persona:
+  - 软萌
+  - 温柔
+  tags:
+  - 晚安
+  - 再见
+  - 睡了
+  - 拜拜
+  - 好梦
+  - 明天见
+  context:
+  - 再见
+  - 结束对话
+  - 晚安
+  - 温柔告别
+  persona:
+  - 软萌
+  - 温柔
+  intensity: 0.2
+  version: 1
