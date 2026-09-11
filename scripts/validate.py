@@ -9,7 +9,7 @@ import re
 DATA_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "stickers.yaml")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-REQUIRED_TOP = ["id", "name", "file", "url", "vad", "irony", "intimacy", "aggression", "description", "tags", "context", "intensity", "version"]
+REQUIRED_TOP = ["id", "name", "file", "vad", "irony", "intimacy", "aggression", "description", "tags", "context", "intensity", "version"]
 REQUIRED_VAD = ["valence", "arousal", "dominance"]
 RANGE_0_1 = ["valence", "arousal", "dominance", "irony", "intimacy", "aggression", "intensity"]
 

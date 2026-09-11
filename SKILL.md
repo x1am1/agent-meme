@@ -1,7 +1,7 @@
 ---
 name: agent-meme
-description: "Structured sticker/meme knowledge base for AI Agents. 6-dimension VAD+social emotion annotation, cosine similarity matching, threshold-gated delivery."
-version: 1.0.0
+description: "Load at session start regardless of topic. Roll 1/3 dice each reply → if hit, VAD+cosine matching. Meme gating happens inside the script — do NOT pre-filter based on conversation atmosphere. Send sticker silently when score exceeds threshold."
+version: 1.2.0
 author: 虾米 Agent
 license: MIT
 metadata:
@@ -11,7 +11,9 @@ metadata:
 
 # Agent Meme — 表情包知识库
 
-为 AI Agent 提供结构化表情包检索能力。每个表情包由 **6 个量化维度**（0-1.0）描述，Agent 将对话语境量化为同维度向量，用余弦相似度匹配，超过阈值即发送。
+为 Agent 提供 6 维情绪向量（VAD + 反讽/亲密/攻击）驱动的表情包检索。将对话语境量化为同维度向量，余弦相似度（70%）+ 标签命中（30%）加权评分，超阈值即发送。
+
+不是给人看的百科，是给 Agent 做的结构化语义检索。
 
 ## 六维模型
 
@@ -28,161 +30,113 @@ metadata:
 
 ## 工作流程
 
-当收到用户消息后，先快速判断对话氛围：
+**每次回复前掷骰子：1/3 概率执行匹配，2/3 直接跳过。**
 
-- **轻松氛围**（闲聊/夸奖/吐槽/分享/结束对话）→ 执行下方匹配，适当发送表情包让对话更有温度
-- **严肃氛围**（纯技术指令/排查 bug/密集问答）→ 跳过，不打扰
+**但用户消息含疑问/索取意图时直接跳过——不掷骰子。** 包括：疑问句、反问、确认追问（"对吧？""你觉得呢"）、信息查询（"多少""在哪""查一下"）。这类对话发图破坏语境。
 
-表情包是对话的调味剂——恰当的发送能让 Agent 显得更有人情味，但永远不能让表情包喧宾夺主。
+**例外（不跳过）：纯情绪感叹**——"啊？""啥？""真的？""不会吧？"这类只有情绪没有信息索取意图的表达，照常掷骰子。
 
-### Step 1: 评估当前语境
+整个匹配过程对用户完全不可见——看不到骰子，看不到计算，只感受结果。
 
-根据对话上下文，将当前语境量化为 6 个数值，同时提取关键词列表。值不必精确，凭语感即可。
+**步骤：评估语境 → 提取情境关键词 → 一条命令匹配 + 日志 → 按阈值发送。**
 
-### Step 2: 计算匹配度
+**关键词提取原则：** 六维向量负责情绪方向，关键词负责社交情境。**提取对话中的情绪/氛围/动作词，不要提取话题名词。** 标签库里全是"谢谢""开心""疑惑""我错了"这类表达，话题名词（任天堂、模拟器、租房、股票）永远撞不上。
 
-遍历 `data/stickers.yaml` 中每个表情包：
+| 对话场景 | ❌ 话题词 | ✅ 情境词 |
+|------|------|------|
+| 聊 Switch 模拟器 | 任天堂,模拟器,法律 | 调侃,嘲讽,开心,得意 |
+| 吐槽代码崩了 | 代码,Python,bug | 崩了,崩溃,无语,我错了 |
+| 租房讨论 | 自如,坂田,房租 | 纠结,焦虑,算了 |
+| 夸你干得好 | AI,review,代码 | 赞,认可,牛,厉害 |
 
-**A. 向量相似度（权重 70%）**
-
-```
-vector_score = cosine_similarity(context, sticker)
-```
-
-**B. 语义覆盖（权重 30%）**
-
-```
-tag_hits = count(intersect(keywords, sticker.tags))
-semantic_score = min(tag_hits / 3, 1.0)
-```
-
-**最终得分：**
-
-```
-final_score = vector_score × 0.70 + semantic_score × 0.30
+```bash
+python3 scripts/match.py --terse --log --roll \
+  --context "0.25,0.65,0.15,0.10,0.55,0.05" \
+  --keywords "崩,代码,三小时" \
+  --threshold 0.72 \
+  --atmosphere "闲聊"
 ```
 
-### Step 3: 阈值判断
+- `--roll`：1/3 概率执行，否则输出 `skip` 并退出
+- `--terse`：输出精简为 `id|score|file` 或 `null`
+- `--log`：自动写入 `logs/match.log`
 
-| 场景 | threshold | 说明 |
-|------|:---------:|------|
-| 严肃话题 | 0.90 | 不确定就不发 |
-| 日常闲聊 | 0.80 | 默认值 |
-| 刻意活跃气氛 | 0.65 | 放低门槛 |
+输出 `id|score|file` 时发图（`file` 是相对项目根的路径）；输出 `null` 或 `skip` 时什么都不做。
 
-### Step 4: 发送
+**阈值：** 命中 ≥ threshold 即发图。闲聊 0.72，严肃 0.85，活跃气氛 0.65。命中发图不解释，未命中跳过不提。
 
-直接发送表情包的 CDN 链接，**不要解释评分过程**。
-
-## 示例
+## 示例（实测输出，不是示意）
 
 ```
+用户：「收到，明白」
+
+语境: [0.65, 0.30, 0.55, 0.05, 0.60, 0.00]
+关键词: [收到, 明白, 好的]
+→ cartoon-001|0.8985|assets/cartoon/001-shoudao-xiaoxin.jpg，发图，记日志。
+
 用户：「我淦，代码又崩了，排查三小时了」
 
-Agent 评估语境：
-  valence: 0.25   (负面)
-  arousal: 0.65   (激动)
-  dominance: 0.15 (被代码压制)
-  irony: 0.10     (不是反话)
-  intimacy: 0.55  (日常吐槽)
-  aggression: 0.05 (对代码发火，不是对人)
-
-关键词：["崩", "代码", "三小时"]
-
-→ 橘猫我错了 final_score 0.91 ≥ 0.80 → 发送 ✅
+语境: [0.20, 0.70, 0.15, 0.10, 0.55, 0.05]
+关键词: [崩了, 崩溃, 无语]
+→ 0.6849 < 0.72，返回 null，不发图（该语境库里没有命中标签的表情包）
 ```
 
-## 当前状态
+**分数构成**：`0.7 × 余弦相似度 + 0.3 × min(命中标签数/3, 1)`。
 
-项目位于 `/opt/data/projects/agent-meme/`，**30 个表情包**已入库：
+- 命中 3 个标签 ≈ 0.98 · 2 个 ≈ 0.89 · 1 个 ≈ 0.79 · 0 个 ≈ 0.69
+- 阈值 0.72 的实际语义 = **至少命中 1 个标签**；向量负责在同一档里挑最贴的
+- 推论：**召回率取决于标签覆盖度，不取决于表情包总数**。同一个语境放 3 张图但标签没写全，照样匹配不上
 
-| 语境 | 数量 | 进度 |
-|------|:--:|:--:|
-| 收到 | 3 | ✅ |
-| 抱歉/失误 | 4 | ✅ |
-| 疑问 | 4 | ✅ |
-| 赞同/称赞 | 3 | ✅ |
-| 开心 | 4 | ✅ |
-| 感谢 | 1 | ✅ |
-| 懂了/顿悟 | 3 | ✅ |
-| 震惊 | 4 | ✅ |
-| 思考中 | 2 | ✅ |
-| 再见 | 2 | ✅ |
-| 无语 | — | ⬜ 待收集 |
-| 自嘲 | — | ⬜ 待收集 |
-| 安慰 | — | ⬜ 待收集 |
-| 拒绝 | — | ⬜ 待收集 |
+## 快速开始
 
-图片随 skill 一起分发，Agent 使用本地 `file` 路径直接发送，无需 CDN。
+### 添加表情包
+
+```bash
+python3 scripts/add.py
+```
+
+交互式 6 步，自动追加到 `data/stickers.yaml`：
+
+1. **选择系列** — 已有系列列表或新建（kebab-case），如 `cat`、`rage`
+2. **基本信息** — 名称、关联 emoji（可选）、图片文件名。ID 按系列自动递增（如 `cat-031`）
+3. **VAD 情绪维度**（0-1.0）：效价 / 唤醒度 / 支配度
+4. **社交维度**（0-1.0）：反讽度 / 亲密度 / 攻击性
+5. **标签与场景** — 3-15 个关键词 + 2-10 个使用场景
+6. **写入** — 校验通过后落盘
+
+### 校验 / 编译
+
+```bash
+python3 scripts/validate.py    # 校验 stickers.yaml（CI 也跑这个）
+python3 scripts/build.py       # → dist/stickerdex.json（完整版）
+                               # → dist/stickerdex.min.json（精简版）
+```
 
 ## 项目结构
 
 ```
 agent-meme/
-├── SKILL.md              # Agent 使用说明
-├── schema.yaml            # 字段规范
-├── data/stickers.yaml     # 表情包元数据
-├── assets/{系列}/         # 图片文件
+├── data/stickers.yaml    # 唯一的元数据源
+├── assets/               # 图片，按系列分目录
 ├── scripts/
-│   ├── add.py             # 交互式新增（适合非技术人员）
-│   ├── validate.py        # CI 校验
-│   └── build.py           # 编译 stickerdex.json
-└── .github/workflows/     # PR 自动校验
-```
-
-## 常用 Agent 语境
-
-| # | 语境 | 适用场景 |
-|---|------|------|
-| 1 | 收到 | 确认指令、收到通知 |
-| 2 | 失误 | 搞错了、Bug 了、道歉 |
-| 3 | 开心 | 好消息、夸用户、庆祝 |
-| 4 | 疑问 | 不懂、不确定、需要澄清 |
-| 5 | 思考中 | 在查、在算、在加载 |
-| 6 | 震惊 | 用户说了离谱的东西 |
-| 7 | 无语 | 用户骚操作，不知道说啥 |
-| 8 | 懂了 | 顿悟、明白了 |
-| 9 | 自嘲 | Agent 自己的锅，主动认 |
-| 10 | 安慰 | 用户受挫了，安抚 |
-| 11 | 感谢 | 用户夸奖/帮忙了 |
-| 12 | 拒绝 | 做不到、不合适 |
-| 13 | 赞同 | 强烈同意、点赞 |
-| 14 | 再见 | 结束对话、暂时告别 |
-
-## 贡献规则
-
-一个表情包 = 一个 PR：
-
-1. `python3 scripts/add.py` 交互式填入元数据
-2. 图片放入 `assets/{系列名}/`
-3. 六维标注原则：
-   - 同一语境下，通过 Valence/Arousal/Dominance 差异区分情绪强度
-   - Irony > 0.3 表示反讽/阴阳怪气，Agent 不能对陌生人发
-   - Intimacy > 0.7 表示死党限定，Agent 需评估关系亲密度
-   - Aggression > 0.3 只能在明确互怼场景用
-4. 每个语境保留 2-4 个表情包，覆盖不同情绪梯度
-
-## 标注示例
-
-```yaml
-- id: "cat-005"
-  name: "白猫对不起"
-  file: "assets/cat/005-duibuqi.jpg"
-  url: "https://cdn.jsdelivr.net/gh/agent-meme/agent-meme/assets/cat/005-duibuqi.jpg"
-  vad: {valence: 0.10, arousal: 0.60, dominance: 0.05}
-  irony: 0.00
-  intimacy: 0.65
-  aggression: 0.00
-  description: "白猫大眼睛闪着蓝色泪光，配文「对不起 我错了」"
-  tags: [对不起, 我错了, 道歉, 原谅我, 哭了, 委屈]
-  context: [犯大错, 极度抱歉, 求原谅, 崩溃道歉, 严重失误]
-  persona: [委屈, 无助, 诚恳]
-  intensity: 0.80
+│   ├── add.py            # 交互式添加
+│   ├── validate.py       # 校验（CI）
+│   ├── build.py          # 编译 dist/
+│   └── match.py          # 匹配 + 日志（Agent 调用）
+├── dist/                 # 构建产物（gitignored）
+└── SKILL.md              # 本文档
 ```
 
 ## 注意事项
 
-- 不要每条消息都发表情包 — 阈值机制已内置克制
-- 高 Irony + 高 Aggression = 阴阳怪气伤害，慎用
-- 发了就不要解释评分过程
-- 图片随 skill 本地分发，`file` 字段即为可用路径
+- **Description 必须是加载触发器，不是自我介绍。** 旧版 description 是"表情包知识库"（自我描述），skill loader 不会主动加载，导致 4 天没触发。改成了"Load at session start"（触发指令）才生效。如果以后 meme 又不触发，第一件事检查 description。
+- **高 Irony(>0.3) + 高 Aggression(>0.3) = 阴阳怪气**，只限互怼场景
+- 图片走本地 `file` 路径，不依赖 CDN
+- 关于 skill description 的触发机制，详见 `references/skill-trigger-pattern.md`
+
+## Verification Checklist
+
+- [ ] `python3 scripts/match.py --roll --terse` 能正常输出 `skip` 或匹配结果
+- [ ] 日志写入 `logs/match.log`
+- [ ] 非疑问句语境下 description 能触发 skill 加载
+- [ ] `skills/creative/agent-meme/SKILL.md` 与 `scripts/` 仍是指向本项目的符号链接（若变成普通文件说明写入时把链接替换了，需重新 `ln -sfn`）

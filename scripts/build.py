@@ -5,19 +5,34 @@ import yaml
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(SCRIPT_DIR)
 DATA_FILE = os.path.join(ROOT, "data", "stickers.yaml")
+SKILL_FILE = os.path.join(ROOT, "SKILL.md")
 OUTPUT_FILE = os.path.join(ROOT, "dist", "stickerdex.json")
 MINIMAL_OUTPUT = os.path.join(ROOT, "dist", "stickerdex.min.json")
+
+
+def read_version():
+    """版本号以 SKILL.md frontmatter 为唯一来源，避免多处手写漂移。"""
+    try:
+        with open(SKILL_FILE, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip().startswith("version:"):
+                    return line.split(":", 1)[1].strip().strip('"\'')
+    except OSError:
+        pass
+    return "0.0.0"
 
 
 def build():
     if not os.path.exists(DATA_FILE):
         print(f"❌ 数据文件不存在: {DATA_FILE}")
         sys.exit(1)
+
+    version = read_version()
 
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
@@ -29,9 +44,9 @@ def build():
     full = {
         "meta": {
             "name": "agent-meme",
-            "version": "1.0.0",
+            "version": version,
             "count": len(stickers),
-            "built": datetime.utcnow().isoformat() + "Z",
+            "built": datetime.now(timezone.utc).isoformat(),
         },
         "stickers": stickers,
     }
@@ -42,9 +57,9 @@ def build():
     minimal = {
         "meta": {
             "name": "agent-meme",
-            "version": "1.0.0",
+            "version": version,
             "count": len(stickers),
-            "built": datetime.utcnow().isoformat() + "Z",
+            "built": datetime.now(timezone.utc).isoformat(),
         },
         "stickers": [
             {
