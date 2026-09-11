@@ -17,7 +17,24 @@ Each sticker has 6 quantitative dimensions (0–1.0):
 | Intimacy | Formal ↔ Close friend | Meme-specific |
 | Aggression | Friendly ↔ Aggressive | Meme-specific |
 
-Agent quantifies current context → 6 values → cosine similarity against library → send if score exceeds threshold.
+Agent quantifies current context → 6 values → **score = 0.7 × cosine similarity + 0.3 × tag hit ratio** (each matching tag adds 0.1, capped at 3) → send if score exceeds threshold.
+
+**Measured score bands** (threshold 0.72): 3 tag hits ≈ 0.98 · 2 ≈ 0.89 · 1 ≈ 0.79 · 0 ≈ 0.69.
+So 0.72 effectively means "at least one tag hit and the vector isn't way off" — tag coverage drives recall, not library size.
+
+## Agent Usage
+
+```bash
+# one call: match + log
+python3 scripts/match.py --terse --log \
+  --context "0.65,0.30,0.55,0.05,0.60,0.00" \
+  --keywords "收到,明白,好的" \
+  --threshold 0.72 \
+  --atmosphere "casual"
+
+# hit:  cartoon-001|0.8985|assets/cartoon/001-shoudao-xiaoxin.jpg
+# miss: null
+```
 
 ## Quick Start
 

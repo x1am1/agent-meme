@@ -132,7 +132,7 @@ agent-meme/
 - **Description 必须是加载触发器，不是自我介绍。** 旧版 description 是"表情包知识库"（自我描述），skill loader 不会主动加载，导致 4 天没触发。改成了"Load at session start"（触发指令）才生效。如果以后 meme 又不触发，第一件事检查 description。
 - **高 Irony(>0.3) + 高 Aggression(>0.3) = 阴阳怪气**，只限互怼场景
 - 图片走本地 `file` 路径，不依赖 CDN
-- 关于 skill description 的触发机制，详见 `references/skill-trigger-pattern.md`
+- 关于 skill description 的触发机制，详见 `references/skill-trigger-pattern.md`（本地笔记，不在本仓库）
 
 ## Verification Checklist
 
